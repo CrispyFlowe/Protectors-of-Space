@@ -14,7 +14,7 @@
  * 
  * Subscribe my channel | contact me: 
  * Youtube - 1: https://www.youtube.com/channel/UCzD7B_hlD90RUaCyHZzBmWg
- * Youtube - 2: https://www.youtube.com/channel/UCzD7B_hlD90RUaCyHZzBmWg
+ * Youtube - 2: https://m.youtube.com/channel/UCMJBARUQArhtbNp7v13n1RQ
  * Github: https://github.com/CrispyFlowe
  * Gmail: (1) cflowe1357@gmail.com | (2) cflowetourist@gmail.com
  * 
