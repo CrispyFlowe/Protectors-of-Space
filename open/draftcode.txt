@@ -1,0 +1,550 @@
+
+window.java
+
+switch (event.getKeyCode()){
+    case KeyEvent.VK_W:
+        // System.out.println("w");
+        // up
+        player_obj.y -= 10;
+        break;
+    case KeyEvent.VK_A:
+        // left
+        player_obj.x -= 10;
+        window_event.key_a = true;
+        break;
+    case KeyEvent.VK_S:
+        // down
+        player_obj.y += 10;
+        break;
+    case KeyEvent.VK_D:
+        // right
+        player_obj.y -= 10;
+        break;
+}
+
+
+player.java
+
+if (!(window.current_key == null)){
+    switch (window.current_key.getKeyCode()){
+        case KeyEvent.VK_W:
+            // up
+            y -= 1;
+            break;
+        case KeyEvent.VK_A:
+            // left
+            x -= 1;
+            break;
+        case KeyEvent.VK_S:
+            // down
+            y += 1;
+            break;
+        case KeyEvent.VK_D:
+            // right
+            x += 1;
+            break;
+    }
+}
+
+
+
+
+x = (int) publics.mouse_position_x() - window.window_x - offset_x;
+y = (int) publics.mouse_position_y() - window.window_y - offset_y;
+
+
+
+
+if (x - width > window.window_x + window.WIDTH){
+    x = window.window_x + window.WIDTH - width;
+}
+if (y - height > window.window_y + window.HEIGHT){
+    y = window.window_y + window.HEIGHT - height;
+}
+
+
+
+
+pen.drawImage(health_bar_imgs.get(hp < 15 && hp > 0 ? 15 - hp : 1), (int) x, (int) y + 20, null);
+
+
+
+if (event_pool.key_w){
+    y -= 1;
+} else if (event_pool.key_a){
+    x -= 1;
+} else if (event_pool.key_s){
+    y += 1;
+} else if (event_pool.key_d){
+    x += 1;
+}
+
+
+event_pool.class
+
+class event_pool {
+    static boolean key_w = false;
+    static boolean key_a = false;
+    static boolean key_s = false;
+    static boolean key_d = false;
+
+    static int reset(){
+        key_w = false;
+        key_a = false;
+        key_s = false;
+        key_d = false;
+        return 0;
+    }
+}
+
+
+
+
+game.java
+
+// create enemy
+for (int a = 0; a < 3; a++){
+    enemy.enemies.add(new boomber());
+
+}
+for (int b = 0; b < 1; b++){
+    enemy.enemies.add(new missile());
+}
+
+
+
+
+int init(){
+    /**
+     * game init
+     */
+    // add timer
+    try {
+        Thread.sleep(10);
+
+    } catch (InterruptedException exception){
+        return 1;
+    }
+    return 0;
+}
+
+
+
+ 
+
+
+
+
+for (int c = 0; c < publics.random(3, 7); c++){
+        int next_rand = publics.random(0, 100);
+
+        if (next_rand < 100){
+            // 99%
+            enemy next_enemy = (
+                enemy.enemy_choice(
+                    new boomber(),
+                    new missile(), 
+                    new small_fo(),
+                    new meteorite()
+                )
+            );
+        } if (next_rand > 50 && next_rand <= 75){
+            // 25%
+            enemy next_enemy = (
+                enemy.enemy_choice(
+
+                )
+            );
+
+        } if (next_rand > 75 && next_rand <= 80){
+            // 10%
+        } if (next_rand > 80 && next_rand <= 81){
+            // 1%
+        } 
+
+
+        for (enemy e: enemy.enemies){
+            // <>temp spawn limit
+            if (publics.distance(next_enemy.x, next_enemy.y, e.x, e.y) < enemy.density + e.width){
+                spawn_flag = false;
+
+            }
+        }
+        if (spawn_flag){
+            enemy.enemies.add(next_enemy);
+        } else if (!(spawn_flag)){
+            spawn_flag = true;
+
+        }
+    }
+}
+
+
+System.out.println(next_rand);
+if (next_rand < 100){
+    // 99%
+    next_enemy = (
+        enemy.enemy_choice(
+            new boomber()
+
+        )
+    );
+} if (next_rand < 50){
+    // 50%
+    next_enemy = (
+        enemy.enemy_choice(
+            new boomber(),
+            new missile(), 
+            new small_fo()
+
+        )
+    ); 
+} if (next_rand < 25){
+    // 10%
+    next_enemy = (
+        enemy.enemy_choice(
+
+            // new missile(),
+            // new meteorite()
+        )
+    );
+} if (next_rand < 1){
+    // 1%
+    next_enemy = (
+        enemy.enemy_choice(
+            // new boomber(),
+            // new missile(), 
+            // new small_fo(),
+            // new meteorite()
+        )
+    );
+
+
+// just in case
+// * deprecated
+} else {
+    next_enemy = (
+        enemy.enemy_choice(
+            new boomber(),
+            new missile(), 
+            new small_fo(),
+            new meteorite()
+        )
+    );
+}
+
+
+old exit button
+publics.mouse_position_x() > 900 - top_x && publics.mouse_position_x() < 1035 - top_x &&
+publics.mouse_position_y() > 300 - top_y && publics.mouse_position_y() < 340 - top_y
+
+
+
+if (clicked(
+    590, 780, 585, 625, top_x, top_y
+)){ 
+    // to updata
+    publics.println("update");
+}
+
+
+
+
+
+
+
+
+
+
+
+int shop_proc(Graphics pen){
+    int top_x = -120; // -120 default, 0 while debug
+    int top_y = 0; 
+    pen.drawImage(begin_interface.update_si, top_x, top_y, null);
+
+
+    // publics.mouse_position_x() > 590 - top_x && publics.mouse_position_x() < 780  - top_x &&
+    // publics.mouse_position_y() > 585 - top_y && publics.mouse_position_y() < 625 - top_y
+
+    publics.show(window.window_x); // 320
+    publics.show(window.window_y); // 170
+
+    // <>print
+    background_obj.show_text("()", 208, 310, pen, 20);
+
+
+    if (window.mouse_down){
+        if (clicked(
+            // last position is 865, 995, 175, 215, top_x, top_y
+            1105, 1235, 175, 295, top_x, top_y
+        )){
+            game_state = state_homepage;
+        } 
+        if (clicked(
+            617, 725, 205, 325, top_x, top_y
+        )){
+            // main gun
+            // publics.println("main gun");
+            if (optionpane("are you sure to update main gun? (cost 5, Y/N)")){
+                publics.println("updated!");
+                player_obj.coin -= 5;
+                player_obj.main_gun_level += 1;
+            }
+        }
+        if (clicked(
+            515, 635, 435, 465, top_x, top_y
+        )){
+            // side cannon
+            // publics.println("side cannon");
+            if (optionpane("are you sure to update side cannon? (cost 5, Y/N)")){
+                publics.println("updated!");
+                player_obj.coin -= 5;
+                player_obj.side_cannon_level += 1; 
+            }
+        }
+        if (clicked(
+            990, 1050, 500, 520, top_x, top_y
+        )){
+            // wings(body)
+            // publics.println("wings & body");
+            if (optionpane("are you sure to update wings & body? (cost 5, Y/N)")){
+                publics.println("updated!");
+                player_obj.coin -= 5;
+                player_obj.wings_level += 1;
+            }
+        }
+
+    }
+    return 0;
+}
+
+
+
+
+
+int begin_interface_proc(Graphics pen){
+
+    pen.drawImage(begin_interface.thumbnail_si, -60, 0, null);
+    if (game_begin_flag){
+        game_state = state_homepage;
+
+    }
+
+    return 0;
+} 
+
+
+
+
+int shop_proc(Graphics pen){
+    int top_x = -120; // -120 default, 0 while debug
+    int top_y = 0; 
+    pen.drawImage(begin_interface.update_si, top_x, top_y, null);
+
+
+    // publics.mouse_position_x() > 590 - top_x && publics.mouse_position_x() < 780  - top_x &&
+    // publics.mouse_position_y() > 585 - top_y && publics.mouse_position_y() < 625 - top_y
+
+    publics.show(window.window_x); // 320
+    publics.show(window.window_y); // 170
+
+    // <>print
+    background_obj.show_text("()", 208, 310, pen, 20);
+
+
+    if (window.mouse_down){
+        if (clicked(
+            // last position is 865, 995, 175, 215, top_x, top_y
+            1105, 1235, 175, 295, top_x, top_y
+        )){
+            game_state = state_homepage;
+        } 
+        if (clicked(
+            617, 725, 205, 325, top_x, top_y
+        )){
+            // main gun
+            // publics.println("main gun");
+            if (optionpane("are you sure to update main gun? (cost 5, Y/N)")){
+                publics.println("updated!");
+                player_obj.coin -= 5;
+                player_obj.main_gun_level += 1;
+            }
+        }
+        if (clicked(
+            515, 635, 435, 465, top_x, top_y
+        )){
+            // side cannon
+            // publics.println("side cannon");
+            if (optionpane("are you sure to update side cannon? (cost 5, Y/N)")){
+                publics.println("updated!");
+                player_obj.coin -= 5;
+                player_obj.side_cannon_level += 1; 
+            }
+        }
+        if (clicked(
+            990, 1050, 500, 520, top_x, top_y
+        )){
+            // wings(body)
+            // publics.println("wings & body");
+            if (optionpane("are you sure to update wings & body? (cost 5, Y/N)")){
+                publics.println("updated!");
+                player_obj.coin -= 5;
+                player_obj.wings_level += 1;
+            }
+        }
+
+    }
+    return 0;
+}
+
+int shop_proc(Graphics pen){
+    int top_x = -60;
+    int top_y = 0;
+    pen.drawImage(begin_interface.shop_si, top_x, top_y, null);
+    if (window.mouse_down){
+        if (
+            publics.mouse_position_x() > 960 && publics.mouse_position_x() < 1095 &&
+            publics.mouse_position_y() > 300 && publics.mouse_position_y() < 340
+        ){
+            game_state = state_homepage;
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+int proc(Graphics pen){
+    long func_begin = publics.nowtime();
+
+
+    background_obj.draw(pen);
+    player_obj.draw(pen);
+    player_obj.display();
+    // display bullets
+    for (bullet b: bullet.bullets){
+        b.draw(pen);
+        b.y -= 1;
+        if (b.y < 0){
+            b.x = 1000;
+        }
+    }
+    // display enemies
+    if (!(enemy.enemies == null) && enemy.enemies.size() > 0){
+        for (enemy e: enemy.enemies){
+            e = ;
+            e.draw(pen);
+            e.y += e.speed;
+
+            // if hit player
+            if (publics.distance(e.x, e.y, player_obj.x, player_obj.y) < player_obj.collide_shape){
+
+                player_obj.hurt(e.damage);
+
+                // enemy.remove(enemy.enemies.get(enemy.enemies.indexOf(e)));
+
+                enemy.remove(e);
+
+            }
+            for (bullet b: bullet.bullets){
+                if (publics.distance(e.x + Math.round(e.width / 2), e.y + Math.round(e.height / 2),
+                 b.x, b.y) < 30){
+                    bullet.remove(b);
+                    enemy.remove(e);
+                }
+            }
+
+            enemy ie = enemy.enemies.get(enemy.enemies.indexOf(e));
+            ie.animate(((int)player_obj.x));
+        }
+    }
+    // do spawn
+    if (publics.nowtime() > next_spawn){
+        next_spawn = publics.nowtime() + publics.random(1000, 5000);
+
+
+        // randomally create enemy
+        for (int c = 0; c < publics.random(3, 7); c++){
+            enemy.enemies.add(
+                enemy.enemy_choice(
+                    new boomber(),
+                    new missile(), 
+                    new small_fo()
+                )
+            );
+        }
+
+    }
+
+
+
+    // event_pool.reset();
+    MSPT = publics.nowtime() - func_begin;
+    return 0;
+}
+
+
+
+
+
+
+
+
+enemy.java
+
+
+
+int draw(Graphics pen){
+    System.out.println(this.frame);
+    if (!(this.frame == null)){
+        pen.drawImage(img, (int)x - this.frame.camera_obj.x, (int)y - this.frame.camera_obj.y, null);
+    }
+    return 0;
+}
+
+
+
+main_file.java
+
+
+
+// publics.print("hello! lol");
+// publics.print(i);
+// publics.print('a');
+// publics.print(true);
+// publics.print(0.01);
+// publics.print(new main_file());
+
+
+
+
+
+save_load.save_data("cflowe", 1, 1, 0, 1, 1019, 2020);
+save_load.save_data("dflowe", 209, 155, 787, 1, 1019, 2022);
+
+publics.println(save_load.load_data("cflowe"));
+
+publics.println(save_load.load_data("dflowe"));
+
+
+object.java
+
+
+// object(game frame){
+//     this.frame = frame;
+// }
+
+// int x = 0;
+// int y = 0;
+// static int remove(object obj){
+//     obj.x = 10000;
+//     obj.y = 10000;
+//     return 0;
+// }
+
+
+
